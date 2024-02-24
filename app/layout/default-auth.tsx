@@ -1,11 +1,23 @@
 import { ReactNode } from "react";
 import Header from "~/components/sections/header";
+import {
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn,
+} from "@clerk/remix";
 
 export default function DefaultLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      <Header></Header>
-      <div>{children}</div>
+      <SignedIn>
+        <Header></Header>
+        <main className="container grid-layout">
+          {children}
+        </main>
+      </SignedIn>
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
     </>
   );
   // <div className="flex flex-col min-h-screen">

@@ -74,3 +74,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .grid-layout {
+    @apply grid grid-cols-4 gap-x-3;
+    @apply tablet:grid-cols-8 tablet:gap-x-4 ;
+    @apply small-desktop:grid-cols-8 small-desktop:gap-x-4;
+    @apply medium-desktop:grid-cols-12 medium-desktop:gap-x-6;
+    @apply large-desktop:grid-cols-12 large-desktop:gap-x-8;
+  }
+}

@@ -1,3 +1,4 @@
+import { UserButton } from "@clerk/remix";
 import Logo from "../../logo";
 import { Nav } from "./nav";
 
@@ -17,11 +18,11 @@ export default function Header() {
         {/* <!-- logo - end --> */}
       </div>
       <Nav className="flex-1" />
-      <div className="ml-auto flex items-center space-x-4">
+      <div className="ml-4 flex items-center space-x-4">
         {/* <HeaderSideNav isCoach={isCoach} /> */}
         {/* <ModeToggle /> */}
         {/* <span>User</span> */}
-        {/* <UserButton /> */}
+        <UserButton />
         {/* <UserButton 
           afterSignOutUrl="/" 
           userProfileMode="navigation"

@@ -18,6 +18,12 @@ export default {
       },
     },
     extend: {
+      screens: {
+        tablet: "600px",
+        "small-desktop": "900px",
+        "medium-desktop": "1200px",
+        "large-desktop": "1800px",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
