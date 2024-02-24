@@ -3,15 +3,24 @@ import { Button } from "~/components/ui/button";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Fit Place" },
+    {
+      property: "og:title",
+      content: "Fit Place",
+    },
+    {
+      name: "description",
+      content: "The fitness app for everyone.",
+    },
   ];
 };
 
 export default function Index() {
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1 className="text-3xl font-bold underline text-purple-400">Hello world!</h1>
+      <h1 className="text-3xl font-bold underline text-purple-400">
+        Hello world!
+      </h1>
       <Button variant={"default"}>Click me</Button>
       <ul>
         <li>

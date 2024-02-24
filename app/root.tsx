@@ -1,12 +1,12 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
+  ScrollRestoration
 } from "@remix-run/react";
 import stylesheet from "~/tailwind.css";
 
@@ -14,6 +14,21 @@ export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
   { rel: "stylesheet", href: stylesheet },
 ];
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Fit Place" },
+    {
+      property: "og:title",
+      content: "Fit Place",
+    },
+    {
+      name: "description",
+      content: "The fitness app for everyone.",
+    },
+  ];
+};
+
 
 export default function App() {
   return (
