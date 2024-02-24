@@ -15,42 +15,14 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-
 export default function Index() {
   return (
-    // <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-    //   <h1 className="text-3xl font-bold underline text-purple-400">
-    //     Hello world!
-    //   </h1>
     //   <Button variant={"default"}>Click me</Button>
-    //   <ul>
-    //     <li>
-    //       <a
-    //         target="_blank"
-    //         href="https://remix.run/tutorials/blog"
-    //         rel="noreferrer"
-    //       >
-    //         15m Quickstart Blog Tutorial
-    //       </a>
-    //     </li>
-    //     <li>
-    //       <a
-    //         target="_blank"
-    //         href="https://remix.run/tutorials/jokes"
-    //         rel="noreferrer"
-    //       >
-    //         Deep Dive Jokes App Tutorial
-    //       </a>
-    //     </li>
-    //     <li>
-    //       <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-    //         Remix Docs
-    //       </a>
-    //     </li>
-    //   </ul>
-    // </div>
     <DefaultLayout>
       <section id="" className="col-span-full">Hello 2</section>
+      <h1 className="text-3xl font-bold underline text-purple-400 col-span-full">
+        Hello world!
+      </h1>
     </DefaultLayout>
   );
 }

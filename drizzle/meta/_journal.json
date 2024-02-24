@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1708797369698,
+      "tag": "0000_cool_ma_gnuci",
+      "breakpoints": true
+    }
+  ]
+}
