@@ -1,3 +1,4 @@
+import { StarterKit } from '@tiptap/starter-kit';
 // import StarterKit from '@tiptap/starter-kit';
 // import dayjs from 'dayjs';
 
@@ -18,16 +19,16 @@ export const headerConfig: HeaderConfig[] = [
     href: '/wod',
   }
 ];
-// export const extensionsEditor = [
-//   StarterKit.configure({
-//     heading: {
-//       HTMLAttributes: {
-//         class: "tiptap-typography",
-//       },
-//       levels: [1, 2, 3],
-//     },
-//   }),
-// ];
+export const extensionsEditor = [
+  StarterKit.configure({
+    heading: {
+      HTMLAttributes: {
+        class: "tiptap-typography",
+      },
+      levels: [1, 2, 3],
+    },
+  }),
+];
 // export const defaultContentWod = (today = true) =>`
 // <h1 id="crossfit-daily-workout-routine">${today ? 'Routine ' + dayjs().format('DD/MM/YYYY') : "CrossFit Routine"}</h1>
 // <h2 id="warm-up">Warm-up</h2>

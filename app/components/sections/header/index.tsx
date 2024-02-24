@@ -13,7 +13,7 @@ export default function Header() {
           aria-label="logo"
         >
           <Logo className={"h-12"} />
-          <span className="text-sky-700 hidden md:block">Fit Place</span>
+          {/* <span className="text-sky-700 hidden md:block">Fit Place</span> */}
         </a>
         {/* <!-- logo - end --> */}
       </div>
