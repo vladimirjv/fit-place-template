@@ -1,6 +1,6 @@
 import { UserButton } from "@clerk/remix";
-import Logo from "../../logo";
 import { Nav } from "./nav";
+import Logo from "../logo";
 
 export default function Header() {
   return (

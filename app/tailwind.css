@@ -76,8 +76,6 @@
     @apply medium-desktop:grid-cols-12 medium-desktop:gap-x-6;
     @apply large-desktop:grid-cols-12 large-desktop:gap-x-8;
   }
-}
-@layer components {
   #editor-rich-text > div > h1 {
     @apply text-primary;
     @apply my-2 scroll-m-20 text-4xl font-extrabold tracking-tight;
@@ -88,34 +86,14 @@
   #editor-rich-text > div > h3 {
     @apply my-2 scroll-m-20 text-2xl font-semibold tracking-tight;
   }
-  /* Basic editor styles */
-  .tiptap {
-    > * + * {
-      margin-top: 0.75em;
-    }
-
-    ul,
-    ol {
-      padding: 0 1rem;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      line-height: 1.1;
-    }
-  }
-  /*
+  
   .routine-item > h1 {
-    @apply my-2 scroll-m-20 text-xl font-semibold tracking-tight text-brand-600;
+    @apply my-2 scroll-m-20 text-xl font-semibold tracking-tight text-primary;
   }
   .routine-item > h2 {
-    @apply my-2 scroll-m-20 text-lg font-semibold tracking-tight text-brand-500;
+    @apply my-2 scroll-m-20 text-lg font-semibold tracking-tight text-primary/90;
   }
   .routine-item > h3 {
-    @apply my-2 scroll-m-20 text-lg font-semibold tracking-tight text-brand-400;
-  } */
+    @apply my-2 scroll-m-20 text-lg font-semibold tracking-tight text-primary/80;
+  }
 }

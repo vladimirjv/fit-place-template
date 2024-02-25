@@ -32,6 +32,7 @@
     "better-sqlite3": "^9.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "dayjs": "^1.11.10",
     "drizzle-orm": "^0.29.4",
     "isbot": "^4.1.0",
     "lucide-react": "^0.338.0",

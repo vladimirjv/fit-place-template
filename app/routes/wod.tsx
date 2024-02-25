@@ -6,6 +6,7 @@ import { useDefaultEditor } from "~/hooks/useDefaultEditor";
 import { createWOD } from "~/db/WOD/handler";
 import { WODInsert, WODSelect } from "~/db/WOD/schema";
 import DefaultLayout from "~/layout/default-auth";
+import { getAuth } from "@clerk/remix/ssr.server";
 
 export default function Wod() {
   const submit = useSubmit();
@@ -13,8 +14,7 @@ export default function Wod() {
   if (!editor) return null;
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const data: Pick<WODSelect, "created_by" | "content"> = {
-      created_by: "user-id",
+    const data: Pick<WODSelect, "content"> = {
       content: editor.getHTML()
     }
     // console.log("🚀 ~ handleSubmit ~ data:", data)
@@ -35,15 +35,21 @@ export default function Wod() {
   );
 }
 // remix action
-export async function action({ request }: ActionFunctionArgs) {
-  const data = await request.formData();
-  const jsonData: Pick<WODInsert, "created_by" | "content"> = Object.fromEntries(data.entries());
+export async function action(args: ActionFunctionArgs) {
+  // get vand  validate data from client
+  const data = await args.request.formData();
+  const jsonData: Pick<WODInsert, "content"> = Object.fromEntries(data.entries());
   console.log("🚀 ~ action ~ jsonData:", jsonData)
   if (!jsonData.content) return new Response("content is required", { status: 400 })
-  if (!jsonData.created_by) return new Response("created_by is required", { status: 400 })
-  
-  await createWOD(jsonData.created_by, jsonData.content);
 
+  // check auth and userId
+  const { userId } = await getAuth(args)
+  if (!userId) {
+    return redirect("/sign-in?redirect_url=" + args.request.url);
+  }
+  
+  // generate a new WOD, save it to the database
+  await createWOD(userId, jsonData.content);
   // return new Response("ok");
   return redirect("/");
 }

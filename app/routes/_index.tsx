@@ -32,10 +32,10 @@ export default function Index() {
       <section className="col-span-full">
         <Welcome />
       </section>
-      <section id="feed" className="col-span-full flex flex-col justify-center">
-        {wods.map((wod) => {
+      <section id="feed" className="col-span-full flex flex-col justify-center gap-4">
+        {wods.map((wod, idx) => {
           return (
-            <WODCard key={wod.id} wod={wod} />
+            <WODCard key={wod.id} wod={wod} index={idx} />
           )
         })}
         

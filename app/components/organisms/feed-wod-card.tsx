@@ -4,9 +4,10 @@ import { Badge } from "../ui/badge";
 
 type WODCardProps = {
   wod: WODSelect;
+  index?: number;
 };
 
-export default function WODCard({ wod }: WODCardProps) {
+export default function WODCard({ wod, index }: WODCardProps) {
 
   // function that recives a iso date and returns true if it is today
   const isToday = (someDate: string) => {
@@ -24,7 +25,7 @@ export default function WODCard({ wod }: WODCardProps) {
       <Accordion
         type="single"
         // defaultValue={openToday && isToday(routine.createdAt) && index === 0 ? `item-${index}` : ""}
-        defaultValue={isToday(wod.created_at) ? `item-${wod.id}` : ""}
+        defaultValue={isToday(wod.created_at) && index === 0 ? `item-${wod.id}` : ""}
         collapsible
       >
         <AccordionItem value={`item-${wod.id}`} className="border-b-0">
