@@ -4,7 +4,7 @@ import {
   StrikethroughIcon,
 } from "@radix-ui/react-icons";
 import { EditorContent, type useEditor } from "@tiptap/react";
-import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
+import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 
 export type TiptapProps = React.HTMLAttributes<HTMLDivElement> & {
   editor: ReturnType<typeof useEditor>;
@@ -123,7 +123,7 @@ const Editor: React.FC<TiptapProps> = ({ editor }) => {
   return (
     <>
       <MenuBar editor={editor} />
-      <EditorContent editor={editor} />
+      <EditorContent id="editor-rich-text" editor={editor} />
     </>
   );
 };

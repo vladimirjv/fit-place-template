@@ -1,10 +1,16 @@
 // ! Turso config for drizzle-orm
 import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
+import { wods } from './WOD/schema';
 
-const client = createClient({ url: 'DATABASE_URL', authToken: 'DATABASE_AUTH_TOKEN' });
+const client = createClient({ url: process.env.DATABASE_URL || "", authToken: process.env.DATABASE_AUTH_TOKEN });
 
-export const db = drizzle(client);
+export const db = drizzle(client, {
+  logger: process.env.NODE_ENV === 'development',
+  schema: {
+    wods
+  }
+});
 
 // const result = await db.select().from(users).all()
 
