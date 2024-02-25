@@ -1,7 +1,8 @@
+import { type User } from "@clerk/remix/api.server";
 import { sql } from "drizzle-orm";
-import { text, sqliteTableCreator, integer } from "drizzle-orm/sqlite-core";
+import { integer, text } from "drizzle-orm/sqlite-core";
+import { sqliteTable } from "../shared";
 
-const sqliteTable = sqliteTableCreator((name) => `public.${name}`);
 
 // WODs drizzle schema definition. Fields: id, created_at, updated_at, created_by, content
 export const wods = sqliteTable('wods', {
@@ -14,4 +15,5 @@ export const wods = sqliteTable('wods', {
 });
 
 export type WODSelect = typeof wods.$inferSelect;
+export type WODWithAuthor = WODSelect & { author: User };
 export type WODInsert = typeof wods.$inferInsert;

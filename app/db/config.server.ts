@@ -1,3 +1,4 @@
+import { classes } from './Classes/schema';
 // ! Turso config for drizzle-orm
 import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
@@ -8,7 +9,8 @@ const client = createClient({ url: process.env.DATABASE_URL || "", authToken: pr
 export const db = drizzle(client, {
   logger: process.env.NODE_ENV === 'development',
   schema: {
-    wods
+    wods,
+    classes
   }
 });
 

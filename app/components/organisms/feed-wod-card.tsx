@@ -1,15 +1,25 @@
-import { WODSelect } from "~/db/WOD/schema";
+import { useState, type MouseEventHandler } from "react";
+import { Button } from "~/components/ui/button";
+import { type WODWithAuthor } from "~/db/WOD/schema";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Badge } from "../ui/badge";
+// import { Badge } from "../ui/badge";
+import dayjs from 'dayjs'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 
 type WODCardProps = {
-  wod: WODSelect;
+  wod: WODWithAuthor;
   index?: number;
 };
 
 export default function WODCard({ wod, index }: WODCardProps) {
+  const [isOpen, setIsOpen] = useState(false);
 
-  // function that recives a iso date and returns true if it is today
+  const onRegister: MouseEventHandler = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("Registering...");
+    setIsOpen(true);
+  }
   const isToday = (someDate: string) => {
     const today = new Date()
     const date = new Date(someDate)
@@ -17,25 +27,59 @@ export default function WODCard({ wod, index }: WODCardProps) {
       date.getMonth() === today.getMonth() &&
       date.getFullYear() === today.getFullYear()
   }
-  
+
+
   return (
     <div
       className="rounded-lg border bg-card p-4 text-card-foreground shadow-sm"
     >
       <Accordion
         type="single"
-        // defaultValue={openToday && isToday(routine.createdAt) && index === 0 ? `item-${index}` : ""}
         defaultValue={isToday(wod.created_at) && index === 0 ? `item-${wod.id}` : ""}
         collapsible
       >
         <AccordionItem value={`item-${wod.id}`} className="border-b-0">
           <AccordionTrigger className="flex scroll-m-20 flex-row justify-between py-0 text-lg font-extrabold tracking-tight text-primary hover:no-underline data-[state=open]:pb-2 ">
             <div className="flex flex-1 justify-start">
-              {/* Routine {dayjs(routine.createdAt).format("DD/MM/YYYY") ?? ""} */}
-              Routine {wod.created_at}
+              Routine {dayjs(wod.created_at).format("DD-MM-YYYY") ?? ""}
             </div>
             <div className="mr-2 hidden flex-row gap-x-2 md:flex">
-              Scores: <Badge variant="outline">no scores</Badge>
+
+              {/* <Button asChild variant={"outline"}>
+                <span
+                  tabIndex={0}
+                  onClick={onRegister}
+                  onKeyUp={() => null}
+                  role="button"
+                >Register</span>
+              </Button> */}
+              <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                <DialogTrigger asChild>
+                  <Button asChild variant={"outline"}>
+                    <span
+                      tabIndex={0}
+                      onClick={onRegister}
+                      onKeyUp={() => null}
+                      role="button"
+                    >Register</span>
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Edit profile</DialogTitle>
+                    <DialogDescription>
+                      {"Make changes to your profile here. Click save when you're done."}
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                    <h3>hello</h3>
+                  </div>
+                  <DialogFooter>
+                    <Button type="submit">Save changes</Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+              {/* Scores: <Badge variant="outline">no scores</Badge> */}
             </div>
           </AccordionTrigger>
           <AccordionContent className="flex flex-col">
@@ -43,19 +87,20 @@ export default function WODCard({ wod, index }: WODCardProps) {
               className="routine-item"
               dangerouslySetInnerHTML={{ __html: wod.content as TrustedHTML }}
             ></div>
-            {/* <div className="flex justify-end gap-x-2 items-center">
-                  <span className="text-sm text-muted-foreground italic pointer-events-none cursor-default">Created by {"  "}
-                    {routine.createdBy?.name ?? "Unknown"}
-                  </span>
-                  {routine.createdBy &&
-                    (<Image
-                      src={routine.createdBy.profileImageURL}
-                      className="rounded-full"
-                      alt="Profile user image"
-                      width={24}
-                      height={24}
-                    />)}
-                </div> */}
+            <div className="flex justify-end gap-x-2 items-center">
+              <span className="text-sm select-none text-muted-foreground italic pointer-events-none cursor-default">Created by {"  "}
+                {wod.author.username ?? (wod.author.firstName + " " + wod.author.lastName) ?? "Unknown"}
+              </span>
+              {wod.author &&
+                <img
+                  src={wod.author.imageUrl}
+                  alt={wod.author.username ?? (wod.author.firstName + " " + wod.author.lastName) ?? "Unknown"}
+                  width={24}
+                  height={24}
+                  className="rounded-full"
+                />
+              }
+            </div>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
