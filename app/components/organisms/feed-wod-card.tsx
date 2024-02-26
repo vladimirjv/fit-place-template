@@ -1,17 +1,18 @@
 import { useState, type MouseEventHandler } from "react";
-import { Button } from "~/components/ui/button";
 import { type WODWithAuthor } from "~/db/WOD/schema";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 // import { Badge } from "../ui/badge";
-import dayjs from 'dayjs'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
+import dayjs from 'dayjs';
+import RegisterClass from "./register-class";
+import { ClassesSelect } from "~/db/Classes/handler";
 
 type WODCardProps = {
   wod: WODWithAuthor;
+  classes: ClassesSelect[]
   index?: number;
 };
 
-export default function WODCard({ wod, index }: WODCardProps) {
+export default function WODCard({ wod, index, classes }: WODCardProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const onRegister: MouseEventHandler = (e) => {
@@ -44,41 +45,13 @@ export default function WODCard({ wod, index }: WODCardProps) {
               Routine {dayjs(wod.created_at).format("DD-MM-YYYY") ?? ""}
             </div>
             <div className="mr-2 hidden flex-row gap-x-2 md:flex">
-
-              {/* <Button asChild variant={"outline"}>
-                <span
-                  tabIndex={0}
-                  onClick={onRegister}
-                  onKeyUp={() => null}
-                  role="button"
-                >Register</span>
-              </Button> */}
-              <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                <DialogTrigger asChild>
-                  <Button asChild variant={"outline"}>
-                    <span
-                      tabIndex={0}
-                      onClick={onRegister}
-                      onKeyUp={() => null}
-                      role="button"
-                    >Register</span>
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
-                  <DialogHeader>
-                    <DialogTitle>Edit profile</DialogTitle>
-                    <DialogDescription>
-                      {"Make changes to your profile here. Click save when you're done."}
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="grid gap-4 py-4">
-                    <h3>hello</h3>
-                  </div>
-                  <DialogFooter>
-                    <Button type="submit">Save changes</Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
+              <RegisterClass
+                classes={classes}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen} 
+                onRegister={onRegister} 
+                triggerLabel="Register"
+              />
               {/* Scores: <Badge variant="outline">no scores</Badge> */}
             </div>
           </AccordionTrigger>
