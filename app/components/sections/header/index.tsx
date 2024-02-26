@@ -1,6 +1,7 @@
 import { UserButton } from "@clerk/remix";
 import { Nav } from "./nav";
 import Logo from "../logo";
+import { ModeToggle } from "~/components/organisms/mode-toggle";
 
 export default function Header() {
   return (
@@ -20,7 +21,7 @@ export default function Header() {
       <Nav className="flex-1" />
       <div className="ml-4 flex items-center space-x-4">
         {/* <HeaderSideNav isCoach={isCoach} /> */}
-        {/* <ModeToggle /> */}
+        <ModeToggle />
         {/* <span>User</span> */}
         <UserButton />
         {/* <UserButton 

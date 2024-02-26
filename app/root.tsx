@@ -6,11 +6,15 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration
+  ScrollRestoration,
+  useLoaderData
 } from "@remix-run/react";
 import { rootAuthLoader } from "@clerk/remix/ssr.server";
 import { ClerkApp, ClerkErrorBoundary } from "@clerk/remix";
 import stylesheet from "~/tailwind.css";
+import clsx from "clsx"
+import { PreventFlashOnWrongTheme, ThemeProvider, useTheme } from "remix-themes"
+import { themeSessionResolver } from "./sessions.server"
  
 
 export const links: LinksFunction = () => [
@@ -33,17 +37,40 @@ export const meta: MetaFunction = () => {
 };
 
 
-export const loader: LoaderFunction = (args) => rootAuthLoader(args);
+export const loader: LoaderFunction = async (args) => {
+  const { getTheme } = await themeSessionResolver(args.request)
+
+  return rootAuthLoader(args, ({ request }) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { sessionId, userId, getToken } = request.auth;
+    // fetch data
+    return { theme: getTheme()};
+  });
+
+};
 
 export const ErrorBoundary = ClerkErrorBoundary();
 
-function App() {
+function AppWithProviders() {
+  const data = useLoaderData<typeof loader>()
   return (
-    <html lang="en">
+    <ThemeProvider specifiedTheme={data.theme} themeAction="/action/set-theme">
+      <App />
+    </ThemeProvider>
+  )
+}
+
+function App() {
+  const data = useLoaderData<typeof loader>()
+  const [theme] = useTheme()
+
+  return (
+    <html lang="en" className={clsx(theme)}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
+        <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
         <Links />
       </head>
       <body>
@@ -56,4 +83,4 @@ function App() {
   );
 }
 
-export default ClerkApp(App);
+export default ClerkApp(AppWithProviders);
