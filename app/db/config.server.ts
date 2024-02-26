@@ -1,4 +1,4 @@
-import { classes } from './Classes/schema';
+import { sessions } from './Sessions/schema';
 // ! Turso config for drizzle-orm
 import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
@@ -10,7 +10,7 @@ export const db = drizzle(client, {
   logger: process.env.NODE_ENV === 'development',
   schema: {
     wods,
-    classes
+    sessions
   }
 });
 

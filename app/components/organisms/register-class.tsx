@@ -1,13 +1,13 @@
 import { Dispatch, MouseEventHandler, SetStateAction } from "react";
 import { Button } from "../ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
-import { ClassesSelect, splitClasses } from "~/db/Classes/handler";
+import { SessionsSelect, splitClasses } from "~/db/Sessions/handler";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 
 
 type RegisterClassProps = {
-  classes: ClassesSelect[]
+  sessions: SessionsSelect[]
   onRegister: MouseEventHandler;
   triggerLabel: string;
   isOpen: boolean;
@@ -19,7 +19,7 @@ export default function RegisterClass(props: RegisterClassProps) {
     // console.log(e);
     props.setIsOpen(false);
   }
-  const { afternoonClasses, morningClasses } = splitClasses(props.classes);
+  const { afternoonClasses, morningClasses } = splitClasses(props.sessions);
 
   return (
     <Dialog open={props.isOpen} onOpenChange={onCloseEvent}>

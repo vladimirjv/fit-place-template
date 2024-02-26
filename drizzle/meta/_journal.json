@@ -22,6 +22,13 @@
       "when": 1708877808925,
       "tag": "0002_lean_korvac",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1708926876219,
+      "tag": "0003_fluffy_wiccan",
+      "breakpoints": true
     }
   ]
 }

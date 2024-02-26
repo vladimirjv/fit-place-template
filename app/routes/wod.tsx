@@ -17,7 +17,6 @@ export default function Wod() {
     const data: Pick<WODSelect, "content"> = {
       content: editor.getHTML()
     }
-    // console.log("🚀 ~ handleSubmit ~ data:", data)
     submit(data, { method: "post" });
   }
 
@@ -34,9 +33,8 @@ export default function Wod() {
     </DefaultLayout>
   );
 }
-// remix action
+
 export async function action(args: ActionFunctionArgs) {
-  // get vand  validate data from client
   const data = await args.request.formData();
   const jsonData: Pick<WODInsert, "content"> = Object.fromEntries(data.entries());
   console.log("🚀 ~ action ~ jsonData:", jsonData)

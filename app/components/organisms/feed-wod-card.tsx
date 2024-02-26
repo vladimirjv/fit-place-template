@@ -4,15 +4,15 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "..
 // import { Badge } from "../ui/badge";
 import dayjs from 'dayjs';
 import RegisterClass from "./register-class";
-import { ClassesSelect } from "~/db/Classes/handler";
+import { SessionsSelect } from "~/db/Sessions/handler";
 
 type WODCardProps = {
   wod: WODWithAuthor;
-  classes: ClassesSelect[]
+  sessions: SessionsSelect[]
   index?: number;
 };
 
-export default function WODCard({ wod, index, classes }: WODCardProps) {
+export default function WODCard({ wod, index, sessions }: WODCardProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const onRegister: MouseEventHandler = (e) => {
@@ -46,7 +46,7 @@ export default function WODCard({ wod, index, classes }: WODCardProps) {
             </div>
             <div className="mr-2 hidden flex-row gap-x-2 md:flex">
               <RegisterClass
-                classes={classes}
+                sessions={sessions}
                 isOpen={isOpen}
                 setIsOpen={setIsOpen} 
                 onRegister={onRegister} 
