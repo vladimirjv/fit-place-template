@@ -15,6 +15,7 @@ import stylesheet from "~/tailwind.css";
 import clsx from "clsx"
 import { PreventFlashOnWrongTheme, ThemeProvider, useTheme } from "remix-themes"
 import { themeSessionResolver } from "./sessions.server"
+import ErrorBanner from "./components/sections/error";
  
 
 export const links: LinksFunction = () => [
@@ -49,7 +50,7 @@ export const loader: LoaderFunction = async (args) => {
 
 };
 
-export const ErrorBoundary = ClerkErrorBoundary();
+export const ErrorBoundary = ClerkErrorBoundary(ErrorBanner);
 
 function AppWithProviders() {
   const data = useLoaderData<typeof loader>()
