@@ -9,4 +9,5 @@ export const sessions = sqliteTable('sessions', {
   updated_at: text('updated_at').notNull().default(sql`CURRENT_TIMESTAMP`),
   start_time: text('start_time'),
   end_time: text('end_time'),
+  availability: integer('availability', { mode: "number" }).default(15),
 });
