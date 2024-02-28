@@ -1,4 +1,4 @@
-import { LoaderFunction, json } from "@remix-run/node";
+import { ActionFunctionArgs, LoaderFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import WODCard from "~/components/organisms/feed-wod-card";
 import Welcome from "~/components/sections/welcome";
@@ -11,12 +11,6 @@ import { clerkClient } from "~/lib/clerk";
 export const loader: LoaderFunction = async () => {
   let wods = await getWODs()
   const sessions = await getSessions();
-  // console.log("🚀 ~ constloader:LoaderFunction= ~ classes:", classes)
-
-  // const auth = await getAuth(args);
-  // if (!auth.userId) {
-  //   return redirect("/sign-in?redirect_url=" + args.request.url);
-  // }
   const clerk = await clerkClient();
   const clients = await clerk.users.getUserList({ 
     userId: wods.map(wod => wod.created_by).filter((v, i, a) => a.indexOf(v) === i) as string[],
@@ -40,6 +34,16 @@ export default function Index() {
         <Welcome />
       </section>
       <section id="feed" className="col-span-full flex flex-col justify-center gap-4">
+        <WODCard wod={{
+          id: 0,
+          created_at: new Date().toISOString(),
+          created_by: "0",
+          // @ts-expect-error no value
+          author: null,
+          content: 'Welcome to the feed!',
+          updated_at: new Date().toISOString()
+        }} sessions={sessions} index={0} />
+        <div className="text-3xl text-center font-bold text-primary">Feed</div>
         {wods.map((wod, idx) => {
           return (
             <WODCard
@@ -54,4 +58,10 @@ export default function Index() {
       </section>
     </DefaultLayout>
   );
+}
+
+export async function action(args: ActionFunctionArgs) {
+  const formData = await args.request.formData();
+  console.log("🚀 ~ action ~ formData", Object.fromEntries(formData.entries()))
+  return json({ message: "ok" });
 }

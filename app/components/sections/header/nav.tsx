@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import { NavLink as Link } from "@remix-run/react";
 import { headerConfig } from "~/lib/config";
 import { cn } from "~/lib/utils";
 
@@ -16,7 +16,13 @@ export function Nav({
           <Link
             key={item.href}
             to={item.href}
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            // className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary/90 active:text-primary"
+            className={({ isActive }) =>
+              cn([
+                "text-sm font-medium text-muted-foreground transition-colors hover:text-primary/90",
+                isActive ? "text-primary" : ""
+              ])
+            }
           >
             {item.title}
           </Link>

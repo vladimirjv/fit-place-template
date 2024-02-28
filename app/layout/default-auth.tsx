@@ -1,19 +1,15 @@
+import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/remix";
 import { ReactNode } from "react";
+import BottomNav from "~/components/sections/bottomNav";
 import Header from "~/components/sections/header";
-import {
-  SignedIn,
-  SignedOut,
-  RedirectToSignIn,
-} from "@clerk/remix";
 
 export default function DefaultLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <SignedIn>
         <Header></Header>
-        <main className="container grid-layout">
-          {children}
-        </main>
+        <main className="container grid-layout">{children}</main>
+        <BottomNav />
       </SignedIn>
       <SignedOut>
         <RedirectToSignIn />

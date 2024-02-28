@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { SessionsSelect, splitClasses } from "~/db/Sessions/handler";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
+import { Form } from "@remix-run/react";
 
 
 type RegisterClassProps = {
@@ -40,31 +41,33 @@ export default function RegisterClass(props: RegisterClassProps) {
             {"Make changes to your profile here. Click save when you're done."}
           </DialogDescription>
         </DialogHeader>
-        <RadioGroup defaultValue="comfortable">
-          <div className="grid gap-4 py-4 grid-cols-2">
-            <div className="space-y-2">
-              <Label>Morning Classes</Label>
-              {morningClasses.map(c => (
-                <div key={c.id} className="flex items-center space-x-2">
-                  <RadioGroupItem value={String(c.id)} id={String(c.id)} />
-                  <Label>{`${c.start_time} - ${c.end_time}`}</Label>
-                </div>
-              ))}
+        <Form method="post">
+          <RadioGroup defaultValue="comfortable" id="session" name="session">
+            <div className="grid gap-4 py-4 grid-cols-2">
+              <div className="space-y-2">
+                <Label>Morning Classes</Label>
+                {morningClasses.map(c => (
+                  <div key={c.id} className="flex items-center space-x-2">
+                    <RadioGroupItem value={String(c.id)} id={String(c.id)} />
+                    <Label>{`${c.start_time} - ${c.end_time}`}</Label>
+                  </div>
+                ))}
+              </div>
+              <div className="space-y-2">
+                <Label>Afternoon Classes</Label>
+                {afternoonClasses.map(c => (
+                  <div key={c.id} className="flex items-center space-x-2">
+                    <RadioGroupItem value={String(c.id)} id={String(c.id)} />
+                    <Label>{`${c.start_time} - ${c.end_time}`}</Label>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="space-y-2">
-              <Label>Afternoon Classes</Label>
-              {afternoonClasses.map(c => (
-                <div key={c.id} className="flex items-center space-x-2">
-                  <RadioGroupItem value={String(c.id)} id={String(c.id)} />
-                  <Label>{`${c.start_time} - ${c.end_time}`}</Label>
-                </div>
-              ))}
-            </div>
-          </div>
-        </RadioGroup>
+          </RadioGroup>
         <DialogFooter>
           <Button type="submit">Save changes</Button>
         </DialogFooter>
+        </Form>
       </DialogContent>
     </Dialog >
   );
