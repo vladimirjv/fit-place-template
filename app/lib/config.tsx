@@ -19,9 +19,17 @@ export const headerConfig: HeaderConfig[] = [
     href: '/',
   },
   {
+    title: 'Sessions',
+    href: '/sessions',
+  },
+  {
+    title: 'Workouts',
+    href: '/wods',
+  },
+  {
     title: 'Generate WOD',
     href: '/wod',
-  }
+  }  
 ];
 export const mobileNavConfig: HeaderConfigMobile[] = [
   {

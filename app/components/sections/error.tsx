@@ -1,5 +1,6 @@
 import { Links, Meta, Scripts, useNavigate, useRouteError } from "@remix-run/react";
 import { Button } from "../ui/button";
+import { ArrowLeft } from "lucide-react";
 
 export default function ErrorBanner() {
   const error = useRouteError();
@@ -19,7 +20,9 @@ export default function ErrorBanner() {
             <span className="text-blue-500">Oops!</span> Internal errror, we are working on it.
           </h1>
           <h2 className="text-5xl">💪🏽</h2>
-          <Button onClick={() => navigate(-1)}>Go back</Button>
+          <Button onClick={() => navigate(-1)} className="gap-4"> 
+          <ArrowLeft className="h-5 w-5" />
+           Go back</Button>
         </section>
         <Scripts />
       </body>

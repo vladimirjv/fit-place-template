@@ -5,7 +5,7 @@ import { ModeToggle } from "~/components/organisms/mode-toggle";
 
 export default function Header() {
   return (
-    <header className="hidden tablet:flex flex-row px-4 border-b">
+    <header className="hidden tablet:landscape:flex flex-row px-4 border-b">
       <div className="flex h-16 items-center ">
         {/* <!-- logo - start --> */}
         <a

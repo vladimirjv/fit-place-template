@@ -7,7 +7,7 @@ export const timeStringToNumber = (time: string) => {
 
 // function that returns the date as formatted string for human readability
 export const formatDate = (date: Date) => {
-  return dayjs(date).format("dddd D");
+  return dayjs(date).format("ddd D");
 }
 export function getNextAvailableDays(numDays: number) {
   const today = new Date();

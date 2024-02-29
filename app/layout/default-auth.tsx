@@ -8,7 +8,7 @@ export default function DefaultLayout({ children }: { children: ReactNode }) {
     <>
       <SignedIn>
         <Header></Header>
-        <main className="container grid-layout">{children}</main>
+        <main className="container overflow-auto" style={{maxHeight: "calc(100vh - 4.125rem)"}}>{children}</main>
         <BottomNav />
       </SignedIn>
       <SignedOut>
